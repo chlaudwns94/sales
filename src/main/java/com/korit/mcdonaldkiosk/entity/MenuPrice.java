@@ -5,13 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Order {
-    private Integer orderId; // ✅ int → Integer 변경
-    private LocalDateTime orderTime;
+public class MenuPrice {
+    private int menuPriceId;
+    private int menuId;
+    private int menuPrice;
+    private int menuSetPrice;
+    private int menuSetLunchPrice;
+    private int menuLargePrice;
 }

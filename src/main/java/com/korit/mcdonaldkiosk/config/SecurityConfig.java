@@ -64,7 +64,9 @@ public class SecurityConfig {
                     "/admin/**",
                     "/swagger-ui/**",
                     "/swagger-resources/**",
-                    "/v3/api-docs/**"
+                    "/order-controller",
+                    "/v3/api-docs/**",
+                    "/user/**"
             ).permitAll();
             authorizeRequests.anyRequest().authenticated();
         });

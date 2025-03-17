@@ -4,4 +4,22 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.korit.mcdonaldkiosk.mapper.OrderMapper">
 
+    <!-- 주문 리스트를 추가하는 쿼리 -->
+    <insert id="addOrderList"
+            useGeneratedKeys="true"
+            keyProperty="orderId"
+            parameterType="com.korit.mcdonaldkiosk.entity.Order">
+        insert into order_tb
+        values (default,now())
+    </insert>
+
+    <insert id="addOrders">
+        insert into order_detail_tb (order_id, menu_id, menu_count)
+        values
+        <foreach collection="orders" item="order" separator=",">
+            (#{order.orderId}, #{order.menuId}, #{order.menuCount})
+        </foreach>
+    </insert>
+
+
 </mapper>
