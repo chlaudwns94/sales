@@ -15,7 +15,6 @@ public class OrderDetail {
     private int menuPriceId;
     private int menuCount;
     private int isSet;
-    private int menu_price;
     private int menuPrice;
     private int discountPrice;
 }

@@ -12,13 +12,14 @@ public class ReqUserOrderDto {
     private int menuCount;
     private int isSet;
 
-    public OrderDetail toEntity(int orderId, int price) {
+    public OrderDetail toEntity(int orderId, int price, int discount) {
         return OrderDetail.builder()
                 .orderId(orderId)
                 .menuPriceId(menuPriceId)
                 .menuCount(menuCount)
                 .isSet(isSet)
                 .menuPrice(price)
+                .discountPrice(discount)
                 .build();
     }
 }

@@ -18,6 +18,7 @@
         SET total_sales =
         (
         SELECT SUM(menu_price)
+
         FROM order_detail_tb
         WHERE order_id = #{orderId}
         )
@@ -28,18 +29,16 @@
         insert into order_detail_tb (order_id, menu_price_id, menu_count, is_set, menu_price)
         values
         <foreach collection="orders" item="order" separator=",">
-            (#{order.orderId},
-            #{order.menuPriceId},
-            #{order.menuCount},
-            #{order.isSet},
-            <choose>
-                <when test="order.isSet == 0">
-                    #{order.menuPrice}  <!-- isSet이 0이면 menu_price -->
-                </when>
-                <when test="order.isSet == 1">
-                    #{order.discountPrice}  <!-- isSet이 1이면 discount_price -->
-                </when>
-            </choose>
+            (
+                #{order.orderId},
+                #{order.menuPriceId},
+                #{order.menuCount},
+                #{order.isSet},
+            CASE
+                WHEN #{order.isSet} = 0 THEN #{order.menuPrice} * #{order.menuCount}
+                WHEN #{order.isSet} = 1 THEN #{order.discountPrice} * #{order.menuCount}
+            ELSE 0
+            END
             )
         </foreach>
     </insert>

@@ -48,9 +48,10 @@ public class OrderService {
 
                     // isSet 값에 따라 가격을 다르게 설정
                     int price = dto.getIsSet() == 1 ? menuPrice.getDiscountPrice() : menuPrice.getMenuPrice();
+                    int discount = dto.getIsSet() == 0 ? menuPrice.getMenuPrice() : menuPrice.getDiscountPrice();
 
                     // OrderDetail 객체 생성
-                    return dto.toEntity(order.getOrderId(), price);
+                    return dto.toEntity(order.getOrderId(), price, discount);
                 })
                 .collect(Collectors.toList());
 
