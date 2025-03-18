@@ -12,4 +12,6 @@ public interface OrderMapper {
     void addOrderList(Order order);
 
     void addOrders(@Param("orders") List<OrderDetail> orders);
+
+    int updateTotalSales(int orderId);
 }

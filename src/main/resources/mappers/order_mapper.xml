@@ -10,14 +10,37 @@
             keyProperty="orderId"
             parameterType="com.korit.mcdonaldkiosk.entity.Order">
         insert into order_tb
-        values (default,now())
+        values (default,now(), 0)
     </insert>
 
+    <update id="updateTotalSales">
+        UPDATE order_tb
+        SET total_sales =
+        (
+        SELECT SUM(menu_price)
+        FROM order_detail_tb
+        WHERE order_id = #{orderId}
+        )
+        WHERE order_id = #{orderId}
+    </update>
+
     <insert id="addOrders">
-        insert into order_detail_tb (order_id, menu_id, menu_count)
+        insert into order_detail_tb (order_id, menu_price_id, menu_count, is_set, menu_price)
         values
         <foreach collection="orders" item="order" separator=",">
-            (#{order.orderId}, #{order.menuId}, #{order.menuCount})
+            (#{order.orderId},
+            #{order.menuPriceId},
+            #{order.menuCount},
+            #{order.isSet},
+            <choose>
+                <when test="order.isSet == 0">
+                    #{order.menuPrice}  <!-- isSet이 0이면 menu_price -->
+                </when>
+                <when test="order.isSet == 1">
+                    #{order.discountPrice}  <!-- isSet이 1이면 discount_price -->
+                </when>
+            </choose>
+            )
         </foreach>
     </insert>
 

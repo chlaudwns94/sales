@@ -11,11 +11,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class OrderDetail {
     private int orderDetailId;
-    private int orderId;
-    private int menuId;
+    private Integer orderId;
+    private int menuPriceId;
     private int menuCount;
-
-    private Menu menu;
+    private int isSet;
+    private int menu_price;
+    private int menuPrice;
+    private int discountPrice;
 }
 
 //세일즈

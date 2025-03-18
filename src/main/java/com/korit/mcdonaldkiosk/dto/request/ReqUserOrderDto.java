@@ -8,14 +8,17 @@ import lombok.Data;
 @Data
 @Builder
 public class ReqUserOrderDto {
-    private int menuId;
+    private int menuPriceId;
     private int menuCount;
+    private int isSet;
 
-    public OrderDetail toEntity(int orderId) {
+    public OrderDetail toEntity(int orderId, int price) {
         return OrderDetail.builder()
                 .orderId(orderId)
-                .menuId(menuId)
+                .menuPriceId(menuPriceId)
                 .menuCount(menuCount)
+                .isSet(isSet)
+                .menuPrice(price)
                 .build();
     }
 }

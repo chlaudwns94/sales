@@ -14,4 +14,5 @@ import java.time.LocalDateTime;
 public class Order {
     private Integer orderId; // ✅ int → Integer 변경
     private LocalDateTime orderTime;
+    private int totalSales;
 }
